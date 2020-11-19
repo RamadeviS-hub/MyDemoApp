@@ -1,6 +1,11 @@
-
-<h4 class="my-2">
+<div style="background-color: rgb(188, 188, 229);"> 
+  <h4 class="my-3">
     Employee list
-  </h4>    
+  </h4> 
+</div>
+ 
+  <div>
     <app-custom-grid   [rows]="rows" [columns]="columns" [totalrecords] = "totalRecords" (pageChanged) = "onPageChange($event)" > </app-custom-grid>
  
+  </div>  
+    
