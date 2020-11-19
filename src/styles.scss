@@ -1,0 +1,32 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+
+html{
+    width: 100%;
+    height: 100%;
+}
+
+.mat-sort-header-container {
+    align-items: center;
+  }
+  
+
+body{
+    height: 100%;
+}
+
+.container-fluid{
+    
+    width: 100%;
+    height: calc(100% - 56px);
+    height: calc(100%-56);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    
+}
+.container-fluid > .content{
+    flex:1;
+}
