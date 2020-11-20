@@ -11,22 +11,27 @@ export class CustomGridComponent implements OnInit {
   pagesCount = 0;
   pages: any = [];
   pageSize = 10;
-  @Input() public currentPage = 1;
+  currentPage = 1;
   sortColumn: '';
   isPagingEnabled = true;
 
   private _rows: Array<any> = [];
   @Input() public set rows(values: Array<any>) {
     if (values && values.length) {
-      this._columns = [];
+      const cols = [];
       var keys = Object.keys(values[0]);
       keys.forEach((value: any) => {
-        let column = this._columns.find((col: any) => col.name === value);
+      let column = this._columns.find((col: any) => col.name === value);       
+      if (column) {
+        // Object.assign(column, value);
+        cols.push(column);
+      }
         if (!column) {
-          this._columns.push({ title: value, name: value, sortOrder: '' });
+          cols.push({ title: value, name: value, sortOrder: '' });
         }
       });
       this._rows = values;
+      this._columns = cols;
       setTimeout(() => {
         //this.currentPage = 1;
         this.setpagination();
@@ -37,6 +42,19 @@ export class CustomGridComponent implements OnInit {
 
   public get rows(): Array<any> {
     return this._rows;
+  }
+  private _activegrid: Array<any> = [];
+  @Input() public set activegrid(values: Array<any>) {
+    if (values) {           
+      setTimeout(() => {
+        this.currentPage = 1;        
+      }, 300);
+
+    }
+  }
+
+  public get activegrid(): Array<any> {
+    return this._activegrid;
   }
   @Input() public config: any = {};
   @Input() public totalrecords: number;
@@ -99,7 +117,7 @@ export class CustomGridComponent implements OnInit {
   }
 
   gotoPage(pageNo: number) {
-    
+
     this.currentPage = pageNo;
     this.pageChanged.emit({ sorting: this.sortColumn, pageNo: this.currentPage, pageSize: this.pageSize });
   }
@@ -132,7 +150,8 @@ export class CustomGridComponent implements OnInit {
         col.sortOrder = '';
 
       } else {
-        col.sortOrder = column.sortOrder === 'asc' ? 'desc' : 'asc';
+        col.sortOrder = col.sortOrder === 'asc' ? 'desc' : 'asc';
+        column.sortOrder = col.sortOrder;
       }
     });
     this.pageChanged.emit({ sortColumn: column.name, sortOrder: column.sortOrder, pageNo: this.currentPage, pageSize: this.pageSize });
