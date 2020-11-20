@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from '../services/employee-service.service';
 import { ProductService } from '../services/product-service.service';
+ 
 
 @Component({
   selector: 'app-dashboard',
@@ -17,6 +18,7 @@ export class DashboardComponent implements OnInit {
     {title: 'Email  ', name: 'email'},          
   ];
   public page:number = 1;
+  public currentPage:number = 1;
   public itemsPerPage:number = 10;
   public maxSize:number = 5;
   public numPages:number = 1;
@@ -48,14 +50,18 @@ export class DashboardComponent implements OnInit {
 
   public showProducts() {
     this.isEmpGridActive = false;
+    this.currentPage = 1;
     const options = {pageNo:1,pageSize:10};
+    
     this.loadEmployeesData(options);
   }
 
   public showEmployees() {
     this.isEmpGridActive = true;
+    this.currentPage = 1;
     const options =  {pageNo:1,pageSize:10};
     this.loadEmployeesData(options);
+    
   }
 
   private loadEmployeesData(options?: any){

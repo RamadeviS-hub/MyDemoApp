@@ -23,7 +23,7 @@ export class ProductService {
         
       ];
 
-     options.sortColumn = options.sortColumn ? options.sortColumn : 'Description';
+     options.sortColumn = options.sortColumn ? options.sortColumn : 'ItemCode';
      if(options.sortOrder === 'desc'){
       items.sort((a,b) => a[options.sortColumn] > b[options.sortColumn] ? -1 : 1)
      } else {

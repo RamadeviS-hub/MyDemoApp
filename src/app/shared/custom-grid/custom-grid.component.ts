@@ -11,7 +11,7 @@ export class CustomGridComponent implements OnInit {
   pagesCount = 0;
   pages: any = [];
   pageSize = 10;
-  currentPage = 1;
+  @Input() public currentPage = 1;
   sortColumn: '';
   isPagingEnabled = true;
 
@@ -28,6 +28,7 @@ export class CustomGridComponent implements OnInit {
       });
       this._rows = values;
       setTimeout(() => {
+        //this.currentPage = 1;
         this.setpagination();
       }, 300);
 
@@ -98,6 +99,7 @@ export class CustomGridComponent implements OnInit {
   }
 
   gotoPage(pageNo: number) {
+    
     this.currentPage = pageNo;
     this.pageChanged.emit({ sorting: this.sortColumn, pageNo: this.currentPage, pageSize: this.pageSize });
   }
