@@ -10,20 +10,20 @@ export class ProductService {
   getProductData(options?: any): Observable<any> {
 
     const items =  [
-        { id: 1, description : "Cheese", price : 150, location: "Refrigerated foods"},
-        { id: 2, description : "Chips", price : 100, location: "the Snack isle"},
-        { id: 3, description : "Pizza", price : 250, location: "the Snack isle"},
-        { id: 4, description : "Chocolate", price : 100, location: "Home baking"},
-        { id: 5, description : "Self-raising flour", price : 120, location: "Home baking"},
-        { id: 6, description : "Cheese_white", price : 150, location: "Refrigerated foods"},
-        { id: 7, description : "Vim Liquid", price : 100, location: "toilet items"},
-        { id: 8, description : "Veg_Pizza", price : 250, location: "the Snack isle"},
-        { id: 9, description : "Dark_Chocolate", price : 100, location: "Home baking"},
-        { id: 10, description : "Wheet flour", price : 120, location: "Home baking"},
+        { ItemCode: "TS001", Description : "Cheese", Price : 150, Stock: "In stock", Location: "Refrigerated foods"},
+        { ItemCode: "TS021", Description : "Chips", Price : 100, Stock: "In stock", Location: "the Snack isle"},
+        { ItemCode: "TS031", Description : "Pizza", Price : 250, Stock: "In stock", Location: "the Snack isle"},
+        { ItemCode: "TS051", Description : "Chocolate", Price : 100, Stock: "out stock", Location: "Home baking"},
+        { ItemCode: "TS071", Description : "Self-raising flour", Price : 120, Stock: "In stock", Location: "Home baking"},
+        { ItemCode: "TS081", Description : "Cheese_white", Price : 150, Stock: "In stock", Location: "Refrigerated foods"},
+        { ItemCode: "TS061", Description : "Vim Liquid", Price : 100, Stock: "In stock", Location: "toilet items"},
+        { ItemCode: "TS031", Description : "Veg_Pizza", Price : 250, Stock: "In stock", Location: "the Snack isle"},
+        { ItemCode: "TS006", Description : "Dark_Chocolate", Price : 100, Stock: "out stock", Location: "Home baking"},
+        { ItemCode: "TS002", Description : "Wheet flour", Price : 120, Stock: "In stock", Location: "Home baking"},
         
       ];
 
-     options.sortColumn = options.sortColumn ? options.sortColumn : 'description';
+     options.sortColumn = options.sortColumn ? options.sortColumn : 'Description';
      if(options.sortOrder === 'desc'){
       items.sort((a,b) => a[options.sortColumn] > b[options.sortColumn] ? -1 : 1)
      } else {
@@ -39,10 +39,11 @@ export class ProductService {
   }
 
   public columns:Array<any> = [
-    {title: 'Id', name: 'ID' },
-    {title: 'description', name: 'Description'},
-    {title: 'price', name: 'Price' },
-    {title: 'location  ', name: 'Location'},     
+    {title: 'ItemCode', name: 'ItemCode'},
+    {title: 'Description', name: 'Description'},
+    {title: 'Price', name: 'Price' },
+    {title: 'Stock', name: 'Stock' },
+    {title: 'Location  ', name: 'Location'},     
         
   ];
 }

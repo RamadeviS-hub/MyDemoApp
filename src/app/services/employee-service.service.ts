@@ -80,8 +80,8 @@ export class EmployeeServiceService {
 
      if(options){
       const slice = items.slice((options.pageNo-1)*options.pageSize,  options.pageNo*options.pageSize)
-      return of({data: slice, count: 57});
+      return of({data: slice, count: items.length});
      }
-    return of({data: items, count: 57});
+    return of({data: items, count: items.length});
   }
 }

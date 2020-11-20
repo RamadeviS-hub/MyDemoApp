@@ -90,8 +90,8 @@ export class CustomGridComponent implements OnInit {
   }
 
   getNextPage(){
-    if(this.currentPage != this.pagesCount){
-      this.currentPage = this.currentPage + 1;
+    if(this.currentPage != this.pagesCount || this.currentPage === this.pagesCount){
+      this.currentPage = this.currentPage - 1;
       this.pageChanged.emit({sorting: this.sortColumn, pageNo: this.currentPage, pageSize: this.pageSize});
      }
 
@@ -103,8 +103,8 @@ export class CustomGridComponent implements OnInit {
   }
 
   getPreviousPage(){
-    if(this.currentPage != 1){
-    this.currentPage = this.currentPage -1;
+    if(this.currentPage != 1 || this.currentPage === 1){
+    this.currentPage = this.currentPage +1;
     this.pageChanged.emit({sorting: this.sortColumn, pageNo: this.currentPage, pageSize: this.pageSize});
    }
   }
