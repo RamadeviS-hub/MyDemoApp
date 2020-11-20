@@ -4,3 +4,10 @@ table {
         cursor: pointer;
     }
 }
+
+.page-link:disabled{
+    color:#ccc;
+    text-decoration: none;
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}

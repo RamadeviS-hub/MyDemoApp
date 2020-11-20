@@ -1,28 +1,25 @@
-<!-- <div style="background-color: rgb(104, 180, 243);"> 
+<!-- <div style="background-color: rgb(104, 180, 243);">  -->
   <h4 class="my-3">
-    Employee list
-  </h4>  -->
+    <span [hidden] = "!isEmpGridActive">Employee list </span>
+    <span  [hidden] = "isEmpGridActive">Products list </span>
+  </h4> 
 
-  <h4 class="my-4">
+
     
  
  
-<div class="b float-left" role="group" aria-label="Basic example" style="margin-right: 5px;"  >
+<div class="btn-group float-right mb-3" role="group" aria-label="Basic example" >
  
-  <button type="button" class="btn btn-primary" (click) = "showEmployees()">Employees</button>
- 
+  <button [ngClass] = "isEmpGridActive ? 'btn-primary':  'btn-secondary'" type="button" class="btn" (click) = "showEmployees()">Employees</button>
+  <button [ngClass] = "!isEmpGridActive ? 'btn-primary' : 'btn-secondary'" type="button" class="btn" (click) = "showProducts()">Prducts</button>  
 </div>
 
- <div >
-   <button type="button" class="btn btn-primary" (click) = "showProducts()">Prducts</button> 
- </div>
-  
-
-</h4> 
-
-
-
   <div>
-  <app-custom-grid   [rows]="rows"  [totalrecords] = "totalRecords" (pageChanged) = "onPageChange($event)" > </app-custom-grid>
+
+  <app-custom-grid   [rows]="rows"  [totalrecords] = "totalRecords" 
+  (pageChanged) = "onPageChange($event)" > </app-custom-grid>
+
+   
+ 
   </div>  
     

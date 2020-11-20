@@ -21,8 +21,8 @@ role="grid" style="width: 100%;">
 <nav aria-label="Page navigation example">
     <ul class="pagination d-inline-flex float-right">
       <li class="page-item" >
-        <button [disabled]="currentPage==1"  (click)="getNextPage()" class="page-link rounded-circle mx-2"  aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
+        <button [disabled]="currentPage == 1"  (click)="getPreviousPage()" class="page-link rounded-circle mx-2" >
+          <span >&laquo;</span>
           <span class="sr-only">Previous</span>
         </button>
       </li>
@@ -33,9 +33,9 @@ role="grid" style="width: 100%;">
         <button (click)="gotoPage(p+1)" class="page-link rounded-circle mx-2" >{{p+1}}</button>
       </li>
     
-      <li class="page-item" (click)="getPreviousPage()">
-        <button class="page-link rounded-circle mx-2"  aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
+      <li class="page-item" (click)="getNextPage()">
+        <button [disabled]="currentPage == pages.length" class="page-link rounded-circle mx-2"  >
+          <span >&raquo;</span>
           <span class="sr-only">Next</span>
         </button>
       </li>
