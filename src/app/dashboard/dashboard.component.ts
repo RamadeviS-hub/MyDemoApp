@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeServiceService } from '../services/employee-service.service';
+import { ProductService } from '../services/product-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,6 +21,7 @@ export class DashboardComponent implements OnInit {
   public maxSize:number = 5;
   public numPages:number = 1;
   public totalRecords:number = 0;
+  public isEmpGridActive = true;
 
   public config:any = {
     paging: true,
@@ -30,7 +32,8 @@ export class DashboardComponent implements OnInit {
 
   private data:Array<any> ;
 
-  public constructor(private empService: EmployeeServiceService) {
+  public constructor(private empService: EmployeeServiceService,
+     private productService: ProductService) {
     
   }
 
@@ -43,14 +46,46 @@ export class DashboardComponent implements OnInit {
     this.loadEmployeesData(options);
   }
 
+  public showProducts() {
+    this.isEmpGridActive = false;
+    const options = {pageNo:1,pageSize:10};
+    this.loadEmployeesData(options);
+  }
+
+  public showEmployees() {
+    this.isEmpGridActive = true;
+    const options =  {pageNo:1,pageSize:10};
+    this.loadEmployeesData(options);
+  }
+
   private loadEmployeesData(options?: any){
+
+    if(this.isEmpGridActive){
     options = options ? options : {pageNo:1,pageSize:10};
     this.empService.getEmployeeData(options).subscribe(res => {
       if(res && res.data){
         this.rows = res.data;      
         this.totalRecords = res.count;
       }
-    })  
+    })
+  } else {
+    this.productService.getProductData(options).subscribe(res => {
+      if(res && res.data){
+        this.rows = res.data;      
+        this.totalRecords = res.count;
+      }
+    }) 
+  }  
+  }
+
+  private loadProductsData(options?: any){
+    // options = options ? options : {pageNo:1,pageSize:10};
+    // this.productService.getProductData.(options).subscribe(res => {
+    //   if(res && res.data){
+    //     this.rows = res.data;      
+    //     this.totalRecords = res.count;
+    //   }
+    // })  
   }
 
   // public changeSort(data:any, config:any):any {

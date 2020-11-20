@@ -15,7 +15,28 @@ export class CustomGridComponent implements OnInit {
   sortColumn: '';
   isPagingEnabled = true;
   
-  @Input() public rows:Array<any> = [];
+   private _rows:Array<any> = [];
+   @Input() public set rows(values:Array<any>) {
+    if(values && values.length)  {
+      this._columns =  [];
+      var keys =  Object.keys(values[0]);
+    keys.forEach((value:any) => {
+      let column = this._columns.find((col:any) => col.name === value);     
+      if (!column) {
+        this._columns.push( {title: value, name: value });
+      }
+    });
+    this._rows = values;
+    setTimeout(() => {
+      this.setpagination();
+    }, 300);
+   
+    }
+  }
+
+  public get rows():Array<any> {
+    return this._rows;
+  }
   @Input() public config:any = {};
   @Input() public totalrecords: number;
 
@@ -26,6 +47,7 @@ export class CustomGridComponent implements OnInit {
 
   @Input()
   public set columns(values:Array<any>) {
+    
     values.forEach((value:any) => {
       let column = this._columns.find((col:any) => col.name === value.name);
       if (column) {
@@ -58,9 +80,13 @@ export class CustomGridComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.setpagination();      
+  }
+
+  setpagination(){
     this.pagesCount = Math.floor(this.totalrecords/this.pageSize);
     this.pagesCount = this.pagesCount + (this.totalrecords % this.pageSize ? 1 : 0 );
-    this.pages = Array.from(Array(this.pagesCount).keys());      
+    this.pages = Array.from(Array(this.pagesCount).keys()); 
   }
 
   getNextPage(){

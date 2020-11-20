@@ -3,9 +3,12 @@
     Employee list
   </h4> 
 </div>
- 
+<div class="btn-group float-right" role="group" aria-label="Basic example">
+  <button type="button" class="btn btn-secondary" (click) = "showEmployees()">Employees</button>
+  <button type="button" class="btn btn-secondary" (click) = "showProducts()">Prducts</button>  
+</div>
   <div>
-    <app-custom-grid   [rows]="rows" [columns]="columns" [totalrecords] = "totalRecords" (pageChanged) = "onPageChange($event)" > </app-custom-grid>
+    <app-custom-grid   [rows]="rows"  [totalrecords] = "totalRecords" (pageChanged) = "onPageChange($event)" > </app-custom-grid>
  
   </div>  
     
